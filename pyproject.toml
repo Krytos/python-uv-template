@@ -89,11 +89,14 @@ line-ending = "lf"
 docstring-code-format = true
 docstring-code-line-length = 80
 
-[tool.ruuf.analyze]
+[tool.ruff.analyze]
 detect-string-imports = true
 
 [tool.ty.environment]
 python-version = "3.13"
+
+[tool.ty.rules]
+unresolved-import = "ignore"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
