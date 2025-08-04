@@ -1,43 +1,92 @@
-[build-system]
-requires = ["poetry-core>=1.2.0", "wheel",]
-build-backend = "poetry.core.masonry.api"
-
-
-[tool.coverage.report]
-exclude_lines = [
-    "pragma: not covered",
-    "@overload",
-]
-
-
-[tool.coverage.run]
-branch = true
-relative_files = true
-omit = [
-    ".tox/*",
-    "tests/*",
-]
-
-
-[tool.poetry]
-name = "project-name"
+[project]
+name = "Python-UV-Project-Template"
 version = "0.1.0"
-description = "A template Poetry project structure."
+description = "A template UV project structure."
+authors = [
+    { name = "Kevin Meinon", email = "kevin@meinon.de" },
+    ]
+readme = "README.md"
+requires-python = ">=3.13"
+
+requires = ["uv_build>=0.7.19"]
+build-backend = "uv_build"
 
 packages = [
     { include = "project_name", from = "src" },
 ]
 
-authors = ["Lari Liuhamo <lari.liuhamo+pypi@gmail.com>",]
-maintainers = ["Lari Liuhamo <lari.liuhamo+pypi@gmail.com>",]
+dependencies = [
+    "rich",
+    "loguru",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "ruff",
+    "python-dotenv",
+    "ty",
+]
+
+[tool.ruff]
+line-length = 120
+indent-width = 4
+show-fixes = true
+fix = true
+exclude = ["migrations"]
+target-version = "py313"
+unsafe-fixes = true
+src = ["src",]
+
+
+[tool.ruff.lint]
+extend-safe-fixes = ["E721", "E712", "F811"]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+ignore = ["SIM116", "E501"]
+exclude = ["docs"]
+
+[tool.ruff.lint.per-file-ignores]
+# https://beta.ruff.rs/docs/rules/
+"__init__.py" = ["F401", "F403", "F405",]
+"tests/*" = ["ANN", "ARG", "INP001", "S101",]
+"logger.py" = ["N815",]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+docstring-code-format = true
+docstring-code-line-length = 80
+
+[tool.ruuf.analyze]
+detect-string-imports = true
+
+[tool.ty]
+environment = { python-version = "3.13" }
 
 include = []
 license = "MIT"
 readme = "README.md"
 
 homepage = "https://pypi.org/project/project-name/"
-repository = "https://github.com/Diapolo10/project-name"
-documentation = "https://github.com/Diapolo10/project-name/tree/main/docs"
+repository = "https://github.com/krytos/project-name"
+documentation = "https://github.com/krytos/project-name/tree/main/docs"
 
 keywords = [
     "python3",
@@ -55,41 +104,6 @@ classifiers = [
     "Typing :: Typed",
 ]
 
-
-[tool.poetry.dependencies]
-python = "^3.9.0"
-python-dotenv = "^1.1.1"
-tomli = { version = "^2.2.1", python = "<3.11" }
-
-
-[tool.poetry.group.dev.dependencies]
-mypy = "^1.17.1"
-
-
-[tool.poetry.group.linters]
-optional = true
-
-
-[tool.poetry.group.linters.dependencies]
-ruff = "^0.12.7"
-
-
-[tool.poetry.group.tests]
-optional = true
-
-
-[tool.poetry.group.tests.dependencies]
-pytest = "^8.4.1"
-pytest-cov = "^6.2.1"
-tox = "^4.28.4"
-tox-gh-actions = "^3.3.0"
-
-
-[tool.poetry.urls]
-"Tracker" = "https://github.com/Diapolo10/project-name/issues"
-"Changelog" = "https://github.com/Diapolo10/project-name/blob/main/CHANGELOG.md"
-
-
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = """
@@ -104,51 +118,21 @@ testpaths = [
     "tests",
 ]
 
-
-[tool.ruff]
-lint.fixable = ["ALL"]
-lint.select = ["ALL"]
-lint.ignore = [
-    "D203",    # One blank line before class docstring
-    "D212",    # Multi-line summary first line
-    "PLR0913", # Too many arguments
-    "Q000",    # Single quotes found but double quotes preferred
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: not covered",
+    "@overload",
 ]
-line-length = 120
-show-fixes = true
-src = ["src",]
-target-version = "py39"
 
 
-[tool.ruff.lint.flake8-copyright]
-author = "Lari Liuhamo"
+[tool.coverage.run]
+branch = true
+relative_files = true
+omit = [
+    ".tox/*",
+    "tests/*",
+]
 
-
-[tool.ruff.lint.flake8-quotes]
-docstring-quotes = "double"
-multiline-quotes = "double"
-
-
-[tool.ruff.lint.mccabe]
-max-complexity = 10
-
-
-[tool.ruff.lint.per-file-ignores]
-# https://beta.ruff.rs/docs/rules/
-"__init__.py" = ["F401", "F403", "F405",]
-"tests/*" = ["ANN", "ARG", "INP001", "S101",]
-"logger.py" = ["N815",]
-
-
-[tool.ruff.lint.pylint]
-max-args = 15
-max-branches = 20
-max-returns = 10
-max-statements = 80
-
-
-[tool.ruff.lint.flake8-tidy-imports]
-ban-relative-imports = "all"
 
 
 [tool.tox]
@@ -163,13 +147,15 @@ python =
     3.10: py310
     3.11: py311
     3.12: py312
+    3.13: py313
+    3.14: py314
     pypy-3.10: pypy3
 
 [testenv]
 passenv = GITHUB_*
-allowlist_externals = poetry
+allowlist_externals = uv
 
 commands =
-    poetry run pytest
-    poetry run coverage report
+    uv run pytest
+    uv run coverage report
 """
