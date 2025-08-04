@@ -1,5 +1,5 @@
 [project]
-name = "Python-UV-Project-Template"
+name = "project_name"
 version = "0.1.0"
 description = "A template UV project structure."
 authors = [{ name = "Kevin Meinon", email = "kevin@meinon.de" },]
@@ -20,12 +20,6 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Typing :: Typed",
-]
-
-urls = [
-    { "homepage" = "https://pypi.org/project/project-name/" },
-    { "repository" = "https://github.com/krytos/project-name" },
-    { "documentation" = "https://github.com/krytos/project-name/tree/main/docs" }
 ]
 
 [build-system]
