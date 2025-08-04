@@ -2,13 +2,34 @@
 name = "Python-UV-Project-Template"
 version = "0.1.0"
 description = "A template UV project structure."
-authors = [
-    { name = "Kevin Meinon", email = "kevin@meinon.de" },
-    ]
+authors = [{ name = "Kevin Meinon", email = "kevin@meinon.de" },]
 readme = "README.md"
 requires-python = ">=3.13"
 
-requires = ["uv_build>=0.7.19"]
+keywords = ["python3"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Typing :: Typed",
+]
+
+urls = [
+    { "homepage" = "https://pypi.org/project/project-name/" },
+    { "repository" = "https://github.com/krytos/project-name" },
+    { "documentation" = "https://github.com/krytos/project-name/tree/main/docs" }
+]
+
+[build-system]
+requires = ["uv_build>=0.8.4,<0.9.0"]
 build-backend = "uv_build"
 
 packages = [
@@ -77,32 +98,8 @@ docstring-code-line-length = 80
 [tool.ruuf.analyze]
 detect-string-imports = true
 
-[tool.ty]
-environment = { python-version = "3.13" }
-
-include = []
-license = "MIT"
-readme = "README.md"
-
-homepage = "https://pypi.org/project/project-name/"
-repository = "https://github.com/krytos/project-name"
-documentation = "https://github.com/krytos/project-name/tree/main/docs"
-
-keywords = [
-    "python3",
-]
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: Implementation :: CPython",
-    "Programming Language :: Python :: Implementation :: PyPy",
-    "Typing :: Typed",
-]
+[tool.ty.environment]
+python-version = "3.13"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
@@ -124,7 +121,6 @@ exclude_lines = [
     "@overload",
 ]
 
-
 [tool.coverage.run]
 branch = true
 relative_files = true
@@ -133,12 +129,10 @@ omit = [
     "tests/*",
 ]
 
-
-
 [tool.tox]
 legacy_tox_ini = """
 [tox]
-envlist = py39, py310, py311, py312, pypy3
+envlist = py39, py310, py311, py312, py313, py314, pypy3
 skip_missing_interpreters = true
 
 [gh-actions]
