@@ -22,13 +22,6 @@ classifiers = [
     "Typing :: Typed",
 ]
 
-[build-system]
-requires = ["uv_build>=0.8.4,<0.9.0"]
-build-backend = "uv_build"
-
-packages = [
-    { include = "project_name", from = "src" },
-]
 
 dependencies = [
     "rich",
@@ -41,6 +34,28 @@ dev = [
     "ruff",
     "python-dotenv",
     "ty",
+]
+
+[project.urls]
+Homepage = "https://pypi.org/project_name/project_name/"
+Repository = "https://github.com/krytos/project_name"
+Documentation = "https://github.com/krytos/project_name/tree/main/docs"
+
+[build-system]
+requires = ["uv_build>=0.8.4,<0.9.0"]
+build-backend = "uv_build"
+
+packages = [
+    { include = "project_name", from = "src" },
+]
+
+[tool.uv]
+link-mode = "hardlink"
+compile-bytecode = true
+cache-dir = "D:/Dev/cache/uv"
+
+packages = [
+    { include = "project_name", from = "src" },
 ]
 
 [tool.ruff]
